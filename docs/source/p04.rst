@@ -1,7 +1,7 @@
-p4 module
-=========
+p04 module
+==========
 
-.. automodule:: p4
+.. automodule:: p04
    :members:
    :undoc-members:
    :show-inheritance:

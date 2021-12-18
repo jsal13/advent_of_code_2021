@@ -1,7 +1,7 @@
-p1 module
-=========
+p13 module
+==========
 
-.. automodule:: p1
+.. automodule:: p13
    :members:
    :undoc-members:
    :show-inheritance:

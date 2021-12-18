@@ -16,7 +16,7 @@ class Coord:
     (_Note: This is overkill for what we need; I wanted to practice using magic methods._)
 
     Attributes
-    ---------
+    ----------
     x : int
     y : int
     """
