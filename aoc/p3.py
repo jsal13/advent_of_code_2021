@@ -87,4 +87,4 @@ if __name__ == "__main__":
     solution_a = report.calculate_part_1()
     solution_b = report.calculate_part_2()
 
-    print(f"AOC2a: {solution_a}\nAOC2b: {solution_b}")
+    print(f"AOC3a: {solution_a}\nAOC3b: {solution_b}")
