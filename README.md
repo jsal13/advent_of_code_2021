@@ -8,17 +8,6 @@ I wanted to make this repo I could share to give an idea of my coding style and 
 
 <hr/>
 
-## Things I Focused On
-
-
-I like clean code.  I like linting.  I like formatting.  I like type-hints.  In line with this, I did my best at the following:
-
-- Linting + Formatting Code (**[Black](https://github.com/psf/black), [Pylint](https://pylint.org/)**)
-- [Type-Hinting](https://docs.python.org/3/library/typing.html) (**[Mypy](https://mypy.readthedocs.io/en/stable/), [Pydantic](https://pydantic-docs.helpmanual.io/)**)
-- Documenting Methods + Generating Documentation (**[Numpy Style](https://numpydoc.readthedocs.io/en/latest/format.html)** when verbosely documenting, **[Sphinx](https://www.sphinx-doc.org/en/master/)** for generating docs)
-- Associated requirements for use in venv
-
-<hr/>
 
 ## Project Structure
 
@@ -29,6 +18,18 @@ aoc/        Contains project modules.
 ├─ data/    Contains input data.
 docs/       Contains documentation.
 ```
+
+<hr/>
+
+## Things I Focused On
+
+
+I like clean code.  I like linting.  I like formatting.  I like type-hints.  In line with this, I did my best at the following:
+
+- Linting + Formatting Code (**[Black](https://github.com/psf/black), [Pylint](https://pylint.org/)**)
+- [Type-Hinting](https://docs.python.org/3/library/typing.html) (**[Mypy](https://mypy.readthedocs.io/en/stable/), [Pydantic](https://pydantic-docs.helpmanual.io/)**)
+- Documenting Methods + Generating Documentation (**[Numpy Style](https://numpydoc.readthedocs.io/en/latest/format.html)** when verbosely documenting, **[Sphinx](https://www.sphinx-doc.org/en/master/)** for generating docs)
+- Associated requirements for use in venv
 
 <hr/>
 
