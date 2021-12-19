@@ -6,8 +6,7 @@ I wanted to make this repo I could share to give an idea of my coding style and 
 
 (This quality varies by degrees, depending on the day, of course!)
 
-
-<br/><hr/><br/>
+<hr/>
 
 ## Things I Focused On
 
@@ -19,7 +18,7 @@ I like clean code.  I like linting.  I like formatting.  I like type-hints.  In 
 - Documenting Methods + Generating Documentation (**[Numpy Style](https://numpydoc.readthedocs.io/en/latest/format.html)** when verbosely documenting, **[Sphinx](https://www.sphinx-doc.org/en/master/)** for generating docs)
 - Associated requirements for use in venv
 
-<br/><hr/><br/>
+<hr/>
 
 ## Project Structure
 
@@ -31,9 +30,7 @@ aoc/        Contains project modules.
 docs/       Contains documentation.
 ```
 
-
-
-<br/><hr/><br/>
+<hr/>
 
 ## Things I Can Still Improve On
 
@@ -41,7 +38,7 @@ docs/       Contains documentation.
 - [ ] Better documentation of the problem we're trying to solve.
 - [ ] Unittests in the earlier problems.
 
-<br/><hr/><br/>
+<hr/>
 
 ## Things to Note
 
