@@ -2,7 +2,6 @@
 Code for https://adventofcode.com/2021/day/17
 """
 
-import os
 import re
 from collections import namedtuple
 

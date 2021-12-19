@@ -2,18 +2,14 @@
 Code for https://adventofcode.com/2021/day/14
 """
 
-import os
 from collections import defaultdict
-from typing import Sequence, Tuple, Any, Union, Dict
-from pydantic.dataclasses import dataclass
-
-import numpy as np
+from typing import Dict
 
 
 class PolymerTemplate:
     """Class representing the polymer template."""
 
-    def __init__(self, polymer_template: str, insertion_rules: Dict[str, str]):
+    def __init__(self, polymer_template: str, insertion_rules: Dict[str, str]) -> None:
         self.polymer_template = polymer_template
         self.insertion_rules = insertion_rules
 
@@ -22,14 +18,14 @@ class PolymerTemplate:
         for idx in range(len(self.polymer_template) - 1):
             self.current_pair_counts[self.polymer_template[idx : idx + 2]] += 1
 
-    def step(self):
+    def step(self) -> None:
         """Steps through inserting and updating current_pair_counts."""
         self.current_pair_counts_copy = self.current_pair_counts.copy()
         for poly, num_pairs in self.current_pair_counts.items():
             self.insert_from_rule(poly)
         self.current_pair_counts = self.current_pair_counts_copy
 
-    def insert_from_rule(self, poly_pair: str):
+    def insert_from_rule(self, poly_pair: str) -> None:
         """Gets the rule and adds new polymer pairs to the current_pair_counts."""
         rule = self.insertion_rules[poly_pair]
         num_pairs = self.current_pair_counts[poly_pair]
@@ -41,9 +37,9 @@ class PolymerTemplate:
         # Removes the old, modified polymer.
         self.current_pair_counts_copy[poly_pair] -= num_pairs
 
-    def count_polymers(self):
+    def count_polymers(self) -> dict[str, int]:
         """Counts the total number of polymer singletons in `current_pair_counts`."""
-        total_polymer_count = defaultdict(int)
+        total_polymer_count: dict[str, int] = defaultdict(int)
 
         # Take the first value in the original series,
         # then we'll look at the second value in each
@@ -75,7 +71,7 @@ if __name__ == "__main__":
     with open("./aoc/data/a14.csv", "r") as f:
         data = f.read()
 
-    def count_polymers(data: str, steps: int = 10):
+    def count_polymers(data: str, steps: int = 10) -> int:
         """Counts polymers given the data after `steps` steps."""
         pt = PolymerTemplate.parse_data(data)
         for i in range(steps):

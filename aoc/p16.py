@@ -2,12 +2,8 @@
 Code for https://adventofcode.com/2021/day/16
 """
 
-import os
 import math
-from typing import Sequence, Tuple, Any, Union, Dict
-from pydantic.dataclasses import dataclass
-
-import numpy as np
+from typing import Any
 
 # Hex string to binary (0-padded 4-digit) string.
 HEX_TO_BIN_STR = {f"{i:0X}": f"{i:04b}" for i in range(16)}
@@ -16,13 +12,13 @@ HEX_TO_BIN_STR = {f"{i:0X}": f"{i:04b}" for i in range(16)}
 class Packet:
     """Class representation of Packet object."""
 
-    def __init__(self, decoded_packet: str):
+    def __init__(self, decoded_packet: str) -> None:
         self.packet = decoded_packet
         self.packet_values: list[Any] = []
         self.cursor = 0
         self.version_sum = 0  # For use in the problem.
 
-    def parse(self):
+    def parse(self) -> None:
         while "1" in self.packet[self.cursor :]:  # Not end-padded zeros.
             self.packet_values.append(self._next_packet())
 
@@ -52,7 +48,7 @@ class Packet:
         self.cursor += n
         return digits
 
-    def _parse_literal_value(self):
+    def _parse_literal_value(self) -> int:
         """Gets literal value of type_id == 4 packet."""
 
         contents = ""
@@ -63,7 +59,7 @@ class Packet:
             contents += self._read_n_digits_and_update_cursor(n=5)[1:]
         return int(contents, 2)
 
-    def _parse_length_type_0_operator(self, type_id: int):
+    def _parse_length_type_0_operator(self, type_id: int) -> int:
         """Parse Lenght_Type 0 Operators."""
         subpacket_len = int(self._read_n_digits_and_update_cursor(15), 2)
         current_cursor_pos = self.cursor
@@ -72,7 +68,7 @@ class Packet:
             values.append(self._next_packet())
         return self._parse_values_for_operator_type_id(type_id, values)
 
-    def _parse_length_type_1_operator(self, type_id: int):
+    def _parse_length_type_1_operator(self, type_id: int) -> int:
         """Parse Lenght_Type 1 Operators."""
         subpacket_num = int(self._read_n_digits_and_update_cursor(11), 2)
         values = [self._next_packet() for _ in range(subpacket_num)]
@@ -100,7 +96,7 @@ class Packet:
             return -1
 
     @classmethod
-    def decode_packet(cls, encoded_packet: str):
+    def decode_packet(cls, encoded_packet: str) -> "Packet":
         decoded_packet = "".join([HEX_TO_BIN_STR[s] for s in encoded_packet])
         return cls(decoded_packet)
 
@@ -108,7 +104,7 @@ class Packet:
 # -- Testing --
 # Note: the initial tests break at the second part, as we add functionality to make the operators work.  To get around this,
 # you can have the `._parse_values_for_operator_type_id` method always return the list itself.
-def test_literal_packet():
+def test_literal_packet() -> None:
     test_encoded_packet = "D2FE28"
     test_packet = Packet.decode_packet(test_encoded_packet)
     test_packet.parse()
@@ -119,7 +115,7 @@ def test_literal_packet():
     ), f"Expected {expected_value}, got {test_packet.packet_values}"
 
 
-def test_operator_0_packet():
+def test_operator_0_packet() -> None:
     test_encoded_packet = "38006F45291200"
     test_packet = Packet.decode_packet(test_encoded_packet)
     test_packet.parse()
@@ -130,7 +126,7 @@ def test_operator_0_packet():
     ), f"Expected {expected_value}, got {test_packet.packet_values}"
 
 
-def test_operator_1_packet():
+def test_operator_1_packet() -> None:
     test_encoded_packet = "EE00D40C823060"
     test_packet = Packet.decode_packet(test_encoded_packet)
     test_packet.parse()
@@ -141,7 +137,7 @@ def test_operator_1_packet():
     ), f"Expected {expected_value}, got {test_packet.packet_values}"
 
 
-def test_version_sum():
+def test_version_sum() -> None:
     tests = [
         ("8A004A801A8002F478", 16),
         ("620080001611562C8802118E34", 12),
@@ -156,16 +152,16 @@ def test_version_sum():
         ), f"Expected {test[1]}, got {test_packet.version_sum}"
 
 
-def test_operator_specifics():
+def test_operator_specifics() -> None:
     tests = [
-        ["C200B40A82", 3],
-        ["04005AC33890", 54],
-        ["880086C3E88112", 7],
-        ["CE00C43D881120", 9],
-        ["D8005AC2A8F0", 1],
-        ["F600BC2D8F", 0],
-        ["9C005AC2F8F0", 0],
-        ["9C0141080250320F1802104A08", 1],
+        ("C200B40A82", 3),
+        ("04005AC33890", 54),
+        ("880086C3E88112", 7),
+        ("CE00C43D881120", 9),
+        ("D8005AC2A8F0", 1),
+        ("F600BC2D8F", 0),
+        ("9C005AC2F8F0", 0),
+        ("9C0141080250320F1802104A08", 1),
     ]
 
     for test in tests:

@@ -3,10 +3,7 @@ Code for https://adventofcode.com/2021/day/2
 """
 
 import os
-from typing import Sequence, Tuple
-from pydantic.dataclasses import dataclass
-
-import numpy as np
+from dataclasses import dataclass
 
 
 @dataclass
@@ -21,25 +18,25 @@ class Coord:
     y : int
     """
 
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Coord({self.x}, {self.y})"
 
-    def __add__(self, coord):
+    def __add__(self, coord: "Coord") -> "Coord":
         return Coord(self.x + coord.x, self.y + coord.y)
 
-    def __mul__(self, other: int):
+    def __mul__(self, other: int) -> "Coord":
         return Coord(self.x * other, self.y * other)
 
-    def __rmul__(self, other: int):
+    def __rmul__(self, other: int) -> "Coord":
         return self.__mul__(other)
 
 
 class Submarine:
-    def __init__(self, directions: list[Tuple[Coord, int]]):
+    def __init__(self, directions: list[tuple[Coord, int]]):
         self.directions = directions
 
     def commands_part_1(self) -> Coord:

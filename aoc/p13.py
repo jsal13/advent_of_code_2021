@@ -2,9 +2,7 @@
 Code for https://adventofcode.com/2021/day/13
 """
 
-import os
-from typing import Sequence, Tuple, Any, Union
-from pydantic.dataclasses import dataclass
+from typing import Tuple
 
 import numpy as np
 
@@ -21,7 +19,7 @@ class Sheet:
             "".join("#" if col else " " for col in row) for row in self.paper
         )
 
-    def plot(self):
+    def plot(self) -> None:
         """Plots the dots onto the paper."""
         # Make the paper big enough for the plots.
         ncols, nrows = self.dots.max(axis=0) + 1
@@ -29,14 +27,14 @@ class Sheet:
         for d in self.dots:
             self.paper[d[1], d[0]] = 1
 
-    def fold(self, axis: str = "y", fold_value: int = 0):
+    def fold(self, axis: str = "y", fold_value: int = 0) -> None:
         """Folds the array along a particular axis (always in half for the problem).  Adds a dot to the new coordinate if one is folded onto it."""
         fold_fn = lambda x: 2 * fold_value - x if x >= fold_value else x
 
         if axis == "x":
             x_vals = np.array(list(map(fold_fn, self.dots[:, 0])))
             y_vals = self.dots[:, 1]
-        if axis == "y":
+        else:
             x_vals = self.dots[:, 0]
             y_vals = np.array(list(map(fold_fn, self.dots[:, 1])))
 
@@ -44,7 +42,7 @@ class Sheet:
         self.plot()
 
     @classmethod
-    def parse_data(cls, dots_data_raw: str):
+    def parse_data(cls, dots_data_raw: str) -> "Sheet":
         data_dots = np.array(
             [list(map(int, d.split(","))) for d in dots_data_raw.split("\n")]
         )

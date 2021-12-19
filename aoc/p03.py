@@ -3,8 +3,7 @@ Code for https://adventofcode.com/2021/day/3
 """
 
 import os
-from typing import Sequence, Tuple, Any
-from pydantic.dataclasses import dataclass
+from typing import Sequence
 
 import numpy as np
 
@@ -33,7 +32,7 @@ class Report:
 
         return gamma_rate_val * epsilon_rate_val
 
-    def calculate_part_2(self):
+    def calculate_part_2(self) -> int:
         """Looks at the mode for each column and picks the corresponding rows which either have mode 1 or 0 (depending on oxy or co2)."""
         oxy_rating = self.data.copy()
         co2_rating = self.data.copy()

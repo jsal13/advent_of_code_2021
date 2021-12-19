@@ -3,8 +3,6 @@ Code for https://adventofcode.com/2021/day/4
 """
 
 import os
-from typing import Sequence, Tuple, Any, Union
-from pydantic.dataclasses import dataclass
 
 import numpy as np
 import numpy.ma as ma
@@ -15,7 +13,7 @@ class Board:
     Class to manage Data for AOC Day 4.  Emulates a 5x5 Bingo Board with integers that are called.
     """
 
-    def __init__(self, board: np.ndarray):
+    def __init__(self, board: np.ndarray) -> None:
         self.board = board.copy()
 
         self.called = np.zeros_like(self.board)
@@ -42,7 +40,7 @@ class Board:
         summed_called_vals = ma.masked_array(self.board, mask=self.called).sum()
         return int(call * summed_called_vals)
 
-    def _reset(self):
+    def _reset(self) -> None:
         """Resets called numbers for the beginning of the game."""
         self.called = np.zeros_like(self.board)
 
@@ -64,7 +62,7 @@ class Boards:
     def __len__(self) -> int:
         return len(self.boards)
 
-    def _mark_cards(self, call: int):
+    def _mark_cards(self, call: int) -> None:
         """Marks all cards which have `call`."""
         for board in self.boards:
             board._mark_board(call)
@@ -73,12 +71,12 @@ class Boards:
         """Returns list of Board if boards have won, else returns None."""
         return [board for board in self.boards if board._has_won()]
 
-    def _remove_board(self, board):
+    def _remove_board(self, board: Board) -> None:
         """Removes Board from the Boards collection."""
         self.boards.remove(board)
 
     @classmethod
-    def parse_input(cls, data: str):
+    def parse_input(cls, data: str) -> "Boards":
         boards_raw = [board.split("\n") for board in data.split("\n\n")]
         boards = [Board.parse_input(board) for board in boards_raw]
         return cls(boards=boards)

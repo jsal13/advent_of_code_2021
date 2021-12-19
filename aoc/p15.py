@@ -2,10 +2,6 @@
 Code for https://adventofcode.com/2021/day/15
 """
 
-import os
-from typing import Sequence, Tuple, Any, Union
-from pydantic.dataclasses import dataclass
-
 import numpy as np
 
 # Note https://github.com/python/mypy/issues/5485 makes doing dataclasses
@@ -24,11 +20,11 @@ class Node:
 class Graph:
     """Represents a graph of nodes.  Neighbors are determined by proximity in row/column values."""
 
-    def __init__(self, nodes: list[list[Node]]):
+    def __init__(self, nodes: list[list[Node]]) -> None:
         self.nodes = nodes
 
     @property
-    def size(self):
+    def size(self) -> int:
         return len(self.nodes)
 
     def __getitem__(self, pos: tuple[int, int]) -> Node:
