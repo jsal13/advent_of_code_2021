@@ -4,8 +4,6 @@ Code for https://adventofcode.com/2021/day/12
 
 from collections import defaultdict
 
-import numpy as np
-
 
 class CaveSystem:
     def __init__(self, nodes: list[str], neighbors: dict[str, list[str]]):
